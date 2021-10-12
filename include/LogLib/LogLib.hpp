@@ -20,7 +20,7 @@ namespace ll{
 	    curr_tm = localtime(&curr_time);
 
         char* timestamp;
-        std::strftime(timestamp,50,"%H:%M:%S_%d-%b-%Y",curr_tm);
+        std::strftime(timestamp,50,"%H:%M:%S_%d-%m-%Y",curr_tm);
 
         std::string timestampStr(timestamp);
         std::string FileName = timestampStr+".log";
