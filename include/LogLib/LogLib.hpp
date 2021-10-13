@@ -75,7 +75,7 @@ class Log {
 
             std::string timestampStr(timestamp);
 
-            this->FileStream << "[" << timestampStr+"] [ERROR] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
+            this->FileStream << "[" << timestampStr+"] [ERROR] [code: "<< errorCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
             this->FileStream.flush();
         }
 
@@ -92,7 +92,7 @@ class Log {
 
             std::string timestampStr(timestamp);
 
-            this->FileStream << "[" << timestampStr+"] [WARN] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
+            this->FileStream << "[" << timestampStr+"] [WARN] [code: "<< warningCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
             this->FileStream.flush();
         }
 };
