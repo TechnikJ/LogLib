@@ -11,6 +11,7 @@
 namespace ll{
 
     std::ofstream FileStream;
+    std::string filePath;
 
     static void Initialize(std::string LogDirectory){
         
@@ -25,20 +26,33 @@ namespace ll{
 	    curr_tm = localtime(&curr_time);
 
         char* timestamp;
-        std::strftime(timestamp,50,"%d-%m-%Y",curr_tm);
+        std::strftime(timestamp,50,"%H:%M:%s_%d-%m-%Y",curr_tm);
 
         std::string timestampStr(timestamp);
         std::string FileName = timestampStr+".log";
 
-        std::cout << FileName << std::endl;
-
-        std::string filePath = LogDirectory+"/"+FileName;
+        filePath = LogDirectory+"/"+FileName;
 
         FileStream.open(filePath);
     }
 
     static void LogString(std::string ctx){
+        time_t curr_time;
+	    tm * curr_tm;
 
+        time(&curr_time);
+	    curr_tm = localtime(&curr_time);
+
+        char* timestamp;
+        std::strftime(timestamp,50,"%H:%M:%s",curr_tm);
+
+        std::string timestampStr(timestamp);
+
+        std::string logContent = "["+timestampStr+"]"+": "+ctx;
+
+        FileStream << logContent;
+        FileStream.close();
+        FileStream.open(filePath);
     }
 
 
