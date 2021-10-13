@@ -29,3 +29,6 @@ Write info to log:
 
 Write Error to log:
 >``.writeError(std::string message, std::string errorCode)``
+
+Write Warning to log:
+>``.writeWarning(std::string message, std::string warningCode)``
