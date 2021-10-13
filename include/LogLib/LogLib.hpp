@@ -8,53 +8,56 @@
 #include <ctime>
 #include <filesystem>
 
-namespace ll{
+class Log {
 
     std::ofstream FileStream;
     std::string filePath;
+    public:
 
-    static void Initialize(std::string LogDirectory){
-        
-        if(!std::filesystem::exists(LogDirectory)){
-            std::filesystem::create_directory(LogDirectory);
+        Log(){}
+
+        void Initialize(std::string LogDirectory){
+            
+            if(!std::filesystem::exists(LogDirectory)){
+                std::filesystem::create_directory(LogDirectory);
+            }
+
+            time_t curr_time;
+            tm * curr_tm;
+
+            time(&curr_time);
+            curr_tm = localtime(&curr_time);
+
+            char* timestamp;
+            std::strftime(timestamp,50,"%H-%M-%S_%d-%m-%Y",curr_tm);
+
+            std::string timestampStr(timestamp);
+            std::string FileName = timestampStr+".log";
+
+            this->filePath = LogDirectory+"/"+FileName;
+
+            this->FileStream.open(this->filePath);
         }
 
-        time_t curr_time;
-	    tm * curr_tm;
+        void WriteString(std::string ctx){
+            time_t curr_time;
+            tm * curr_tm;
 
-        time(&curr_time);
-	    curr_tm = localtime(&curr_time);
+            time(&curr_time);
+            curr_tm = localtime(&curr_time);
 
-        char* timestamp;
-        std::strftime(timestamp,50,"%H-%M-%S_%d-%m-%Y",curr_tm);
+            char* timestamp;
+            std::strftime(timestamp,50,"%H:%M:%s",curr_tm);
 
-        std::string timestampStr(timestamp);
-        std::string FileName = timestampStr+".log";
+            std::string timestampStr(timestamp);
 
-        filePath = LogDirectory+"/"+FileName;
+            std::string logContent = "["+timestampStr+"]"+": "+ctx;
 
-        FileStream.open(filePath);
-    }
-
-    static void LogString(std::string ctx){
-        time_t curr_time;
-	    tm * curr_tm;
-
-        time(&curr_time);
-	    curr_tm = localtime(&curr_time);
-
-        char* timestamp;
-        std::strftime(timestamp,50,"%H:%M:%s",curr_tm);
-
-        std::string timestampStr(timestamp);
-
-        std::string logContent = "["+timestampStr+"]"+": "+ctx;
-
-        //FileStream << logContent;
-        FileStream << "LOG";
-        FileStream.close();
-        FileStream.open(filePath);
-    }
+            //FileStream << logContent;
+            this->FileStream << "LOG";
+            this->FileStream.close();
+            this->FileStream.open(this->filePath);
+        }
 
 
-}
+};

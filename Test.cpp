@@ -1,9 +1,11 @@
 #include "include/LogLib/LogLib.hpp"
 
 int main(){
-    ll::Initialize("Log");
 
-    ll::LogString("LogTest");
-    ll::LogString("Just A Test"); 
+    Log log = Log();
+
+    log.Initialize("Log");
+    log.WriteString("Hi");
+    
     return 1;
 }
