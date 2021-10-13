@@ -24,11 +24,5 @@ Make sure to install ``cmake,make,gcc`` for this to work.
 Initialize the log:
 >``.init(std::string Path);``
 
-Write info to log:
->``.writeInfo(std::string message);``
-
-Write Error to log:
->``.writeError(std::string message, std::string errorCode)``
-
-Write Warning to log:
->``.writeWarning(std::string message, std::string warningCode)``
+Write to log:
+>``.write(std::string message, SeverityLevel Level,[std::string Code]);``
