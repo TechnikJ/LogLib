@@ -8,91 +8,95 @@
 #include <ctime>
 #include <filesystem>
 #include <source_location>
+namespace ll{
+    enum class SeverityLevel: uint8_t{
+        INFO,
+        WARNING,
+        ERROR
+    };
+    class Log {
+            std::ofstream m_fileStream;
+            std::string m_filePath;
+        public:
 
-class Log {
-
-    private:
-        std::ofstream FileStream;
-        std::string filePath;
-    public:
-
-        Log(){}
-        ~Log(){
-            this->FileStream.close();
-        }
-
-        void init(std::string LogDirectory){
-            
-            if(!std::filesystem::exists(LogDirectory)){
-                std::filesystem::create_directory(LogDirectory);
+            Log(){}
+            ~Log(){
+                this->m_fileStream.close();
             }
 
-            time_t curr_time;
-            tm * curr_tm;
+            void init(std::string t_logDirectory){
+                
+                if(!std::filesystem::exists(t_logDirectory)){
+                    std::filesystem::create_directory(t_logDirectory);
+                }
 
-            time(&curr_time);
-            curr_tm = localtime(&curr_time);
+                time_t m_curr_time;
+                tm * m_curr_tm;
 
-            char* timestamp;
-            std::strftime(timestamp,50,"%H-%M-%S_%d-%m-%Y",curr_tm);
+                time(&m_curr_time);
+                m_curr_tm = localtime(&m_curr_time);
 
-            std::string timestampStr(timestamp);
-            std::string FileName = timestampStr+".log";
+                char* timestamp;
+                std::strftime(timestamp,50,"%H-%M-%S_%d-%m-%Y",m_curr_tm);
 
-            this->filePath = LogDirectory+"/"+FileName;
-            this->FileStream.open(this->filePath);
-        }
+                std::string m_timestampStr(timestamp);
+                std::string m_fileName = m_timestampStr+".log";
 
-        void  writeInfo(std::string msg){
-            
-            time_t curr_time;
-            tm * curr_tm;
+                this->m_filePath = t_logDirectory+"/"+m_fileName;
+                this->m_fileStream.open(this->m_filePath);
+            }
 
-            time(&curr_time);
-            curr_tm = localtime(&curr_time);
+            void writeInfo(std::string msg){
+                
+                time_t curr_time;
+                tm * curr_tm;
 
-            char* timestamp;
-            std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
+                time(&curr_time);
+                curr_tm = localtime(&curr_time);
 
-            std::string timestampStr(timestamp);
+                char* timestamp;
+                std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
 
-            std::string logContent = "["+timestampStr+"] [INFO]"+": "+msg;
+                std::string timestampStr(timestamp);
 
-            this->FileStream << logContent << std::endl;
-            this->FileStream.flush();
-        }
+                std::string logContent = "["+timestampStr+"] [INFO]"+": "+msg;
 
-        void writeError(std::string msg, std::string errorCode, const std::source_location location = std::source_location::current()){
+                this->m_fileStream << logContent << std::endl;
+                this->m_fileStream.flush();
+            }
 
-            time_t curr_time;
-            tm * curr_tm;
+            void writeError(std::string msg, std::string errorCode, const std::source_location location = std::source_location::current()){
 
-            time(&curr_time);
-            curr_tm = localtime(&curr_time);
+                time_t curr_time;
+                tm * curr_tm;
 
-            char* timestamp;
-            std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
+                time(&curr_time);
+                curr_tm = localtime(&curr_time);
 
-            std::string timestampStr(timestamp);
+                char* timestamp;
+                std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
 
-            this->FileStream << "[" << timestampStr+"] [ERROR] [code: "<< errorCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
-            this->FileStream.flush();
-        }
+                std::string timestampStr(timestamp);
 
-        void writeWarning(std::string msg, std::string warningCode, const std::source_location location = std::source_location::current()){
+                this->m_fileStream << "[" << timestampStr+"] [ERROR] [code: "<< errorCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
+                this->m_fileStream.flush();
+            }
 
-            time_t curr_time;
-            tm * curr_tm;
+            void writeWarning(std::string msg, std::string warningCode, const std::source_location location = std::source_location::current()){
 
-            time(&curr_time);
-            curr_tm = localtime(&curr_time);
+                time_t curr_time;
+                tm * curr_tm;
 
-            char* timestamp;
-            std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
+                time(&curr_time);
+                curr_tm = localtime(&curr_time);
 
-            std::string timestampStr(timestamp);
+                char* timestamp;
+                std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
 
-            this->FileStream << "[" << timestampStr+"] [WARN] [code: "<< warningCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
-            this->FileStream.flush();
-        }
-};
+                std::string timestampStr(timestamp);
+
+                this->m_fileStream << "[" << timestampStr+"] [WARN] [code: "<< warningCode << "] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
+                this->m_fileStream.flush();
+            }
+    };
+}
