@@ -15,13 +15,7 @@ class Log {
         std::string filePath;
     public:
 
-        Log(){}
-        ~Log(){
-            this->FileStream.close();
-        }
-
-        void Initialize(std::string LogDirectory){
-            
+        Log(std::string LogDirectory){
             if(!std::filesystem::exists(LogDirectory)){
                 std::filesystem::create_directory(LogDirectory);
             }
@@ -40,6 +34,9 @@ class Log {
 
             this->filePath = LogDirectory+"/"+FileName;
             this->FileStream.open(this->filePath);
+        }
+        ~Log(){
+            this->FileStream.close();
         }
 
         void WriteString(std::string ctx){
