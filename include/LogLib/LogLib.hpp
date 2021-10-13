@@ -20,7 +20,7 @@ class Log {
             this->FileStream.close();
         }
 
-        void Initialize(std::string LogDirectory){
+        void init(std::string LogDirectory){
             
             if(!std::filesystem::exists(LogDirectory)){
                 std::filesystem::create_directory(LogDirectory);
@@ -42,8 +42,7 @@ class Log {
             this->FileStream.open(this->filePath);
         }
 
-        void WriteString(std::string ctx){
-            std::cout << this->filePath << std::endl;
+        void  writeString(std::string ctx){
             
             time_t curr_time;
             tm * curr_tm;
@@ -58,8 +57,7 @@ class Log {
 
             std::string logContent = "["+timestampStr+"]"+": "+ctx;
 
-            //this->FileStream << logContent;
-            this->FileStream << ctx << std::endl;
+            this->FileStream << logContent << std::endl;
             this->FileStream.flush();
         }
 };
