@@ -7,6 +7,6 @@ int main(){
     log.init("Log");
     log.writeInfo("Hi");
     log.writeInfo("Ho");
-
+    log.writeError("Test","1x002");
     return 1;
 }
