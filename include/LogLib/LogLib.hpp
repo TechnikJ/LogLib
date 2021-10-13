@@ -78,4 +78,21 @@ class Log {
             this->FileStream << "[" << timestampStr+"] [ERROR] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
             this->FileStream.flush();
         }
+
+        void writeWarning(std::string msg, std::string warningCode, const std::source_location location = std::source_location::current()){
+
+            time_t curr_time;
+            tm * curr_tm;
+
+            time(&curr_time);
+            curr_tm = localtime(&curr_time);
+
+            char* timestamp;
+            std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
+
+            std::string timestampStr(timestamp);
+
+            this->FileStream << "[" << timestampStr+"] [WARN] " << location.file_name() << "(" << location.line() << ":" << location.column() << ") `" << location.function_name() << "` : " << msg << std::endl;
+            this->FileStream.flush();
+        }
 };
