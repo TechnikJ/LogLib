@@ -2,9 +2,7 @@
 
 int main(){
 
-    Log log = Log();
-
-    log.init("Log");
+    Log log = Log("Log");
     log.WriteString("Hi");
     log.WriteString("Ho");
 
