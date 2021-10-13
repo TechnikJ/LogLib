@@ -42,7 +42,7 @@ class Log {
             this->FileStream.open(this->filePath);
         }
 
-        void  writeString(std::string ctx){
+        void  writeInfo(std::string ctx){
             
             time_t curr_time;
             tm * curr_tm;
@@ -55,7 +55,7 @@ class Log {
 
             std::string timestampStr(timestamp);
 
-            std::string logContent = "["+timestampStr+"]"+": "+ctx;
+            std::string logContent = "["+timestampStr+"] [INFO]"+": "+ctx;
 
             this->FileStream << logContent << std::endl;
             this->FileStream.flush();
