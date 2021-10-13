@@ -6,12 +6,17 @@
 #include <iostream>
 #include <fstream>
 #include <ctime>
+#include <filesystem>
 
 namespace ll{
 
     std::ofstream FileStream;
 
     static void Initialize(std::string LogDirectory){
+        
+        if(!std::filesystem::exists(LogDirectory)){
+            std::filesystem::create_directory(LogDirectory);
+        }
 
         time_t curr_time;
 	    tm * curr_tm;
@@ -20,16 +25,20 @@ namespace ll{
 	    curr_tm = localtime(&curr_time);
 
         char* timestamp;
-        std::strftime(timestamp,50,"%H:%M:%S_%d-%m-%Y",curr_tm);
+        std::strftime(timestamp,50,"%d-%m-%Y",curr_tm);
 
         std::string timestampStr(timestamp);
         std::string FileName = timestampStr+".log";
 
         std::cout << FileName << std::endl;
 
-        //LogDirectory;
+        std::string filePath = LogDirectory+"/"+FileName;
 
-        //FileStream.open();
+        FileStream.open(filePath);
+    }
+
+    static void LogString(std::string ctx){
+
     }
 
 
