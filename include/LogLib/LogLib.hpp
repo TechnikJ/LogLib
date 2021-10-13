@@ -46,7 +46,7 @@ namespace ll{
                 this->m_fileStream.open(this->m_filePath);
             }
 
-            void write(std::string t_msg, SeverityLevel t_lev, const std::source_location t_location = std::source_location::current()){
+            void write(std::string t_msg, SeverityLevel t_lev, std::source_location t_location){
                 time_t m_curr_time;
                 tm * m_curr_tm;
 
@@ -72,7 +72,7 @@ namespace ll{
                 this->m_fileStream.flush();
             }
 
-            void write(std::string t_msg, SeverityLevel t_lev, std::string t_code, const std::source_location t_location = std::source_location::current()){
+            void write(std::string t_msg, SeverityLevel t_lev, std::string t_code, std::source_location t_location){
                 time_t m_curr_time;
                 tm * m_curr_tm;
 
