@@ -5,8 +5,8 @@ int main(){
     Log log = Log();
 
     log.init("Log");
-    log.writeString("Hi");
-    log.writeString("Ho");
+    log.writeInfo("Hi");
+    log.writeInfo("Ho");
 
     return 1;
 }
