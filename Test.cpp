@@ -2,11 +2,12 @@
 
 int main(){
 
-    Log log = Log();
+    ll::Log log = ll::Log();
 
     log.init("Log");
-    log.writeInfo("Test");
-    log.writeWarning("Test","303");
-    log.writeError("Test","404");
+    log.write("Info... just info",ll::SeverityLevel::INFO);
+    log.write("ErrorWithCode",ll::SeverityLevel::ERROR,"0x02304780");
+    log.write("WarningWithoutCode",ll::SeverityLevel::WARNING);
+
     return 1;
 }
