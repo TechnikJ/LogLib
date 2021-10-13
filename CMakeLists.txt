@@ -2,10 +2,7 @@ cmake_minimum_required(VERSION 3.21)
 
 project(LogLibTest)
 
-add_executable(LogLibTest Test.cpp)
+set(CMAKE_CXX_STANDARD 20)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-if(MSVC)
-    target_compile_options(LogLibTest INTERFACE /arch:SSE2)
-else()
-    target_compile_options(LogLibTest INTERFACE -msse2)
-endif()
+add_executable(LogLibTest Test.cpp)
