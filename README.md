@@ -25,4 +25,7 @@ Initialize the log:
 >``.init(std::string Path);``
 
 Write info to log:
->``.writeInfo(std::string content);``
+>``.writeInfo(std::string message);``
+
+Write Error to log:
+>``.writeError(std::string message, std::string errorCode)``
