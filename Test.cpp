@@ -5,8 +5,8 @@ int main(){
     Log log = Log();
 
     log.init("Log");
-    log.WriteString("Hi");
-    log.WriteString("Ho");
+    log.writeString("Hi");
+    log.writeString("Ho");
 
     return 1;
 }
