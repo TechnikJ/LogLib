@@ -4,7 +4,7 @@ int main(){
 
     Log log = Log();
 
-    log.Initialize("Log");
+    log.init("Log");
     log.WriteString("Hi");
     log.WriteString("Ho");
 
