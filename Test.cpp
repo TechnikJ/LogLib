@@ -5,4 +5,5 @@ int main(){
 
     ll::LogString("LogTest");
     ll::LogString("Just A Test"); 
+    return 1;
 }

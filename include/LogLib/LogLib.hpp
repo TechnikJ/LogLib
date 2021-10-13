@@ -26,7 +26,7 @@ namespace ll{
 	    curr_tm = localtime(&curr_time);
 
         char* timestamp;
-        std::strftime(timestamp,50,"%H:%M:%s_%d-%m-%Y",curr_tm);
+        std::strftime(timestamp,50,"%H-%M-%S_%d-%m-%Y",curr_tm);
 
         std::string timestampStr(timestamp);
         std::string FileName = timestampStr+".log";
@@ -50,7 +50,8 @@ namespace ll{
 
         std::string logContent = "["+timestampStr+"]"+": "+ctx;
 
-        FileStream << logContent;
+        //FileStream << logContent;
+        FileStream << "LOG";
         FileStream.close();
         FileStream.open(filePath);
     }
