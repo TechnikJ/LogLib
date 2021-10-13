@@ -10,8 +10,9 @@
 
 class Log {
 
-    std::ofstream FileStream;
-    std::string filePath;
+    private:
+        std::ofstream FileStream;
+        std::string filePath;
     public:
 
         Log(){}
@@ -35,11 +36,12 @@ class Log {
             std::string FileName = timestampStr+".log";
 
             this->filePath = LogDirectory+"/"+FileName;
-
             this->FileStream.open(this->filePath);
         }
 
         void WriteString(std::string ctx){
+            std::cout << this->filePath << std::endl;
+            
             time_t curr_time;
             tm * curr_tm;
 
@@ -53,10 +55,13 @@ class Log {
 
             std::string logContent = "["+timestampStr+"]"+": "+ctx;
 
-            //FileStream << logContent;
-            this->FileStream << "LOG";
+            //this->FileStream << logContent;
+            this->FileStream << ctx << std::endl;
+            this->FileStream.flush();
+        }
+
+        void Close(){
             this->FileStream.close();
-            this->FileStream.open(this->filePath);
         }
 
 

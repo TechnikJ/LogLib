@@ -6,6 +6,7 @@ int main(){
 
     log.Initialize("Log");
     log.WriteString("Hi");
-    
+    log.WriteString("Ho");
+
     return 1;
 }
