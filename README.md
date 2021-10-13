@@ -24,8 +24,5 @@ Make sure to install ``cmake,make,gcc`` for this to work.
 Initialize the log:
 >``.init(std::string Path);``
 
-Close log safely (Optional):
->``.close();``
-
 Write string to log:
 >``.writeString(std::string content);``
