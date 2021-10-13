@@ -51,7 +51,7 @@ class Log {
             curr_tm = localtime(&curr_time);
 
             char* timestamp;
-            std::strftime(timestamp,50,"%H:%M:%s",curr_tm);
+            std::strftime(timestamp,50,"%H:%M:%S",curr_tm);
 
             std::string timestampStr(timestamp);
 
