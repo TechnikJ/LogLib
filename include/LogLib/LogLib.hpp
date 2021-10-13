@@ -17,7 +17,7 @@ class Log {
 
         Log(){}
 
-        void Initialize(std::string LogDirectory){
+        void init(std::string LogDirectory){
             
             if(!std::filesystem::exists(LogDirectory)){
                 std::filesystem::create_directory(LogDirectory);
@@ -60,7 +60,7 @@ class Log {
             this->FileStream.flush();
         }
 
-        void Close(){
+        void close(){
             this->FileStream.close();
         }
 
