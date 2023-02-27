@@ -22,7 +22,7 @@ Make sure to install ``cmake,make,gcc`` for this to work.
 ### Documentation
 
 Initialize the log:
->``.init(std::string Path);``
+>``Log(std::string Path);``
 
 Write to log:
 >``.write(std::string message, SeverityLevel Level,[std::string Code]);``
