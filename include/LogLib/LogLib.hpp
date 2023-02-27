@@ -19,12 +19,7 @@ namespace ll{
             std::string m_filePath;
         public:
 
-            Log(){}
-            ~Log(){
-                this->m_fileStream.close();
-            }
-
-            void init(std::string t_logDirectory){
+            Log(std::string t_logDirectory){
                 
                 if(!std::filesystem::exists(t_logDirectory)){
                     std::filesystem::create_directory(t_logDirectory);
@@ -96,6 +91,10 @@ namespace ll{
                     break;
                 }
                 this->m_fileStream.flush();
+            }
+        
+            ~Log(){
+                this->m_fileStream.close();
             }
 
             
